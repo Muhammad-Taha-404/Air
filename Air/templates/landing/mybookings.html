@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+My Bookings
+{% endblock %}
+{% block content %}
+<div class="p-4 flex-1 overflow-y-auto">
+        {% include "partials/gallery.html" %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for mybooking in bookings %}
+<div class="max-w-2xl overflow-hidden bg-white mt-8 rounded-lg shadow-md dark:bg-gray-800">
+    <img class="object-cover w-full h-64" src="{{mybooking.image}}" alt="Article">
+
+    <div class="p-6">
+        <div>
+            <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">{{mybooking.airline}}</span>
+            <a href='{% url "book" %}' class="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">{{mybooking.origin}}  → → {{mybooking.destination}}</a>
+            <p class="mt-2 text-sm text-green-600 dark:text-green-400">Price : {{mybooking.price}} Rs<br>
+                Seats :{{mybooking.seats_available}}<br>
+                Cabin Class ({{mybooking.flight_class}}) <br>
+                Discount / Promo Code (Not Available)<br>
+                Baggage Allowance (7kg hand + 20kg checked)<br>
+            </p>
+        </div>
+        <div class="mt-4">
+           
+            <div class="flex items-center">
+                
+                <span class="mx-1 text-xs text-gray-600 dark:text-gray-300">{{flight.departure_time}}</span>
+            </div>
+        </div>
+    </div>
+</div>{% endfor %}
+
+    </div></div>
+{% endblock %}
